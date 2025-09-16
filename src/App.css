@@ -1,9 +1,22 @@
 /* ================================
+   🎨 Variables globales
+================================ */
+:root {
+  --color-fondo: #f0f4f8;
+  --color-texto: #2d3748;
+  --color-primario: #4c51bf;
+  --color-primario-dark: #434190;
+  --color-primario-intenso: #2c5282;
+  --color-gris: #cbd5e0;
+  --color-gris-claro: #e2e8f0;
+}
+
+/* ================================
    🎨 Estilos Globales
 ================================ */
 body {
-  background-color: #f0f4f8; /* Fondo suave */
-  color: #2d3748;           /* Texto principal gris oscuro */
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
   font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: center;
@@ -11,6 +24,10 @@ body {
   min-height: 100vh;
   padding: 20px;
   margin: 0;
+}
+
+* {
+  transition: all 0.2s ease-in-out;
 }
 
 /* ================================
@@ -46,7 +63,7 @@ h2 {
 .preguntas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 30px; 
+  gap: 30px;
   margin-bottom: 30px;
 }
 
@@ -56,7 +73,7 @@ label {
   justify-content: space-between;
   align-items: flex-start;
   font-weight: 600;
-  min-height: 80px; 
+  min-height: 80px;
 }
 
 input,
@@ -64,7 +81,7 @@ select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid var(--color-gris);
   border-radius: 8px;
   font-size: 14px;
   outline: none;
@@ -72,7 +89,7 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #4c51bf; /* Resalta el campo */
+  border-color: var(--color-primario);
   box-shadow: 0 0 5px rgba(76, 81, 191, 0.3);
 }
 
@@ -80,7 +97,7 @@ select:focus {
    📊 Resultados
 ================================ */
 #resultado {
-  background-color: #e2e8f0;
+  background-color: var(--color-gris-claro);
   padding: 20px;
   border-radius: 8px;
   text-align: left;
@@ -116,7 +133,7 @@ select:focus {
 }
 
 .acciones button {
-  background-color: #4c51bf;   /* Azul principal */
+  background-color: var(--color-primario);
   color: white;
   padding: 12px 24px;
   border: none;
@@ -128,111 +145,72 @@ select:focus {
 }
 
 .acciones button:hover {
-  background-color: #434190;   /* Azul más oscuro */
+  background-color: var(--color-primario-dark);
   transform: translateY(-2px);
 }
 
 .acciones button:active {
-  background-color: #2c5282;   /* Azul intenso */
+  background-color: var(--color-primario-intenso);
   transform: scale(0.97);
 }
 
 .acciones button:disabled {
-  background-color: #e2e8f0;   /* Gris claro */
+  background-color: var(--color-gris-claro);
   color: #a0aec0;
   cursor: not-allowed;
   transform: none;
 }
 
 /* ================================
-   📄 Estilos para Impresión
+   📱 Responsive
+================================ */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 20px;
+  }
+  .acciones {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ================================
+   🎨 Estilos para impresión
 ================================ */
 @media print {
-  /* Restablece los estilos base para la impresión */
   body {
-    background-color: #ffffff;
-    padding: 0;
+    -webkit-print-color-adjust: exact !important; /* Chrome/Safari */
+    print-color-adjust: exact !important;        /* Estándar */
+    background: #f0f4f8 !important; /* mismo fondo suave */
+    color: #2d3748 !important;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    font-size: 12pt; /* Tamaño de fuente más legible para impresión */
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    padding: 0;
   }
 
-  /* Oculta los elementos que no son parte del documento final */
-  .acciones,
-  .preguntas {
-    display: none;
-  }
-
-  /* El contenedor principal debe ocupar todo el ancho */
   .app-container {
-    box-shadow: none;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 0;
-    width: 100%;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e0 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: none !important;
   }
 
-  /* Ajusta los títulos y márgenes para un diseño compacto */
-  h1 {
-    font-size: 1.5em; /* Título más pequeño para ahorrar espacio */
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  h2 {
-    font-size: 1.2em;
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  
-  /* Ajustes para la sección de 'Pena inicial' */
-  .inputs {
-    display: flex; /* Utiliza flexbox para una mejor alineación horizontal */
-    justify-content: space-around;
-    gap: 10px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e2e8e0;
-    padding-bottom: 10px;
-  }
-
-  .inputs label {
-    display: block; /* Asegura que la etiqueta y el valor estén en su propia línea */
-    font-weight: bold;
-    min-height: auto;
-    width: auto;
-    text-align: left;
-  }
-  
-  .inputs input {
-    display: none; /* Oculta el campo de texto, manteniendo solo la etiqueta */
-  }
-
-  /* Formato para el resultado y los detalles */
   #resultado {
-    background-color: #f7fafc;
-    border: 1px solid #e2e8e0;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    background: #e2e8f0 !important;
+    border: 1px solid #a0aec0 !important;
   }
-  
-  .detalles {
-    list-style: none;
-    padding: 0;
-  }
-  
+
   .detalle-item {
-    background-color: #ffffff;
-    border: 1px solid #cbd5e0;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    page-break-inside: avoid; /* Evita saltos de página dentro de los ítems */
+    background: #f7fafc !important;
+    border: 1px solid #cbd5e0 !important;
   }
-  
-  .detalle-item p {
-    margin: 0;
-    padding: 2px 0;
+
+  h1, h2 {
+    color: #4a5568 !important;
+  }
+
+  .acciones {
+    display: none !important; /* ocultamos botones en impresión */
   }
 }

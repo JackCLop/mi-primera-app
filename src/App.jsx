@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import styles from "./App.css?inline"; // 👈 Importamos CSS como texto (Vite lo permite)
 
 export default function App() {
   const [years, setYears] = useState(0);
@@ -67,24 +68,15 @@ export default function App() {
       <html>
         <head>
           <title>Vista Previa de Pena</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
-            h2 { color: #2c3e50; }
-            .detalles { margin-top: 10px; }
-            .detalle-item {
-              border: 1px solid #e2e8f0;
-              border-radius: 6px;
-              padding: 10px;
-              margin-bottom: 8px;
-            }
-            .detalle-item p { margin: 0; }
-          </style>
+          <style>${styles}</style> <!-- 👈 Aquí inyectamos todo App.css -->
         </head>
         <body>
-          <h2>Resultado</h2>
-          <p><strong>Pena inicial:</strong> ${convertirDias(totalDiasInicial)}</p>
-          <p><strong>Pena final:</strong> ${convertirDias(penaActual)}</p>
-          ${detallesHtml}
+          <div class="app-container">
+            <h2>Resultado</h2>
+            <p><strong>Pena inicial:</strong> ${convertirDias(totalDiasInicial)}</p>
+            <p><strong>Pena final:</strong> ${convertirDias(penaActual)}</p>
+            ${detallesHtml}
+          </div>
         </body>
       </html>
     `);
