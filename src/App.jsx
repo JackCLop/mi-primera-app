@@ -164,6 +164,11 @@ export default function App() {
         <button onClick={handleVistaPrevia}>Vista Previa</button>
         <button onClick={handleImprimir}>Imprimir / PDF</button>
       </div>
+      
+      {/* Footer */}
+      <footer className="app-footer">
+        <p>© 2025 - Simulador de Pena | Desarrollado con ❤️ Jacl</p>
+      </footer>
     </div>
   );
 }
